@@ -8,13 +8,20 @@
         <import type="android.view.View" />
 
 
+        <variable
+            name="visibility"
+            type="Integer"
+
+            />
+
     </data>
 
     <androidx.wear.widget.BoxInsetLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dark_grey"
+        android:background="#FF00FF"
         android:padding="@dimen/box_inset_layout_padding"
+
         tools:context=".ui.activities.MainActivity"
         tools:deviceIds="wear">
 
@@ -69,7 +76,11 @@
             <!--            Options Dismissible Layout-->
             <include
                 android:id="@+id/layout_swipe"
-                layout="@layout/layout_swipe_options" />
+                layout="@layout/layout_swipe_options"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{visibility}"
+                tools:visibility="gone" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

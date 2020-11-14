@@ -7,20 +7,26 @@
     <data>
 
 
+        <variable
+            name="visibility"
+            type="Integer"
+
+            />
+
     </data>
 
     <androidx.wear.widget.SwipeDismissFrameLayout
         android:id="@+id/swipe_to_dismiss"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/fuchsia_2"
+        android:background="@color/white"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="@{visibility}"
+        tools:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
         tools:showIn="@layout/activity_main">
 
         <LinearLayout

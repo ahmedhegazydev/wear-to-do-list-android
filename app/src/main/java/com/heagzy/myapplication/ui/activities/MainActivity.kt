@@ -7,6 +7,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.widget.SwipeDismissFrameLayout
+import com.daimajia.androidanimations.library.Techniques
+import com.daimajia.androidanimations.library.YoYo
 import com.heagzy.myapplication.R
 import com.heagzy.myapplication.databinding.ActivityMainBinding
 
@@ -24,7 +26,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 
 //        setContentView(R.layout.activity_main)
         db = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
+        db.visibility = View.GONE
 
         setSwipeDismissCallBack()
 
@@ -68,7 +70,13 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 
     private fun addNewTask() {
 //        this.toast("Adding new task")
-        db.layoutSwipe.swipeToDismiss.visibility = View.VISIBLE
+//        db.layoutSwipe.visibility = View.VISIBLE
+        db.visibility = View.VISIBLE
+
+        YoYo.with(Techniques.SlideInRight)
+            .duration(350)
+            .playOn(db.layoutSwipe.root)
+
 
     }
 
