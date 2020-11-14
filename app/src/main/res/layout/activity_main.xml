@@ -7,12 +7,14 @@
 
         <import type="android.view.View" />
 
+        <variable
+            name="onWidgetClicked"
+            type="android.view.View.OnClickListener" />
+
 
         <variable
             name="visibility"
-            type="Integer"
-
-            />
+            type="Integer" />
 
     </data>
 
@@ -21,7 +23,6 @@
         android:layout_height="match_parent"
         android:background="#FF00FF"
         android:padding="@dimen/box_inset_layout_padding"
-
         tools:context=".ui.activities.MainActivity"
         tools:deviceIds="wear">
 
@@ -79,6 +80,7 @@
                 layout="@layout/layout_swipe_options"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:onWidgetClicked="@{onWidgetClicked}"
                 android:visibility="@{visibility}"
                 tools:visibility="gone" />
 

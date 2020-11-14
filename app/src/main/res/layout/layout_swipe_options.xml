@@ -8,10 +8,13 @@
 
 
         <variable
-            name="visibility"
-            type="Integer"
+            name="onWidgetClicked"
+            type="android.view.View.OnClickListener" />
 
-            />
+
+        <variable
+            name="visibility"
+            type="Integer" />
 
     </data>
 
@@ -43,6 +46,7 @@
 
             <!--Speak-->
             <LinearLayout
+                android:onClick="@{onWidgetClicked::onClick}"
                 android:id="@+id/layout_speak"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,6 +93,7 @@
                 android:background="@drawable/bg_rounded_option"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
+                android:onClick="@{onWidgetClicked::onClick}"
                 android:paddingStart="10dp"
                 android:paddingEnd="15dp">
 

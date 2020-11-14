@@ -27,11 +27,8 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 //        setContentView(R.layout.activity_main)
         db = DataBindingUtil.setContentView(this, R.layout.activity_main)
         db.visibility = View.GONE
-
         setSwipeDismissCallBack()
-
         setOnClickListener()
-
 
     }
 
@@ -40,6 +37,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
             override fun onDismissed(layout: SwipeDismissFrameLayout?) {
                 Log.e(TAG, "onDismissed: ")
                 db.layoutSwipe.swipeToDismiss.visibility = View.GONE
+//                db.visibility = View.GONE
 
             }
 
@@ -63,6 +61,20 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 
         db.tvCancel.setOnClickListener {
 
+        }
+
+
+        db.onWidgetClicked = View.OnClickListener {
+            when (it.id) {
+                R.id.layout_type -> {
+                    Log.e(TAG, "setOnClickListener: ")
+
+                }
+                R.id.layout_speak -> {
+                    Log.e(TAG, "setOnClickListener: ")
+
+                }
+            }
         }
 
 
