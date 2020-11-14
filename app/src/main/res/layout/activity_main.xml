@@ -5,6 +5,9 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+
     </data>
 
     <androidx.wear.widget.BoxInsetLayout
@@ -15,23 +18,38 @@
         tools:context=".MainActivity"
         tools:deviceIds="wear">
 
-        <FrameLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/inner_frame_layout_padding"
             app:boxedEdges="all">
 
 
+            <!--            <androidx.wear.widget.WearableRecyclerView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:id="@+id/rv_notes"-->
+            <!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+            <!--                />-->
 
-            <androidx.wear.widget.WearableRecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/rv_notes"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+            <ImageView
+                android:id="@+id/fab_add_task"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/bg_rounded_add_task"
+                android:padding="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_add_new_task"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
 
                 />
 
 
-        </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.wear.widget.BoxInsetLayout>
 </layout>

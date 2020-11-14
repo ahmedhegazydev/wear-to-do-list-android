@@ -1,19 +1,19 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+
 }
 
 android {
-    compileSdkVersion "android-R"
-    buildToolsVersion "29.0.3"
-
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.heagzy.myapplication"
-        minSdkVersion "R"
-        targetSdkVersion "R"
+        minSdkVersion 24
+        targetSdkVersion 28
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
-
     }
 
     buildTypes {
@@ -26,6 +26,13 @@ android {
 
     buildFeatures {
         dataBinding true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 }
 
@@ -40,10 +47,14 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.wear:wear:1.1.0'
     compileOnly 'com.google.android.wearable:wearable:2.8.1'
-
+//    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
 
     // Preferences DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0-alpha03"
+    //FAB
+    implementation 'com.google.android.material:material:1.2.1'
+    kapt 'androidx.databinding:databinding-compiler:4.1.1'
+
 
 }
