@@ -15,13 +15,12 @@
         android:layout_height="match_parent"
         android:background="@color/dark_grey"
         android:padding="@dimen/box_inset_layout_padding"
-        tools:context=".MainActivity"
+        tools:context=".ui.activities.MainActivity"
         tools:deviceIds="wear">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/inner_frame_layout_padding"
             app:boxedEdges="all">
 
 
@@ -33,6 +32,7 @@
             <!--                />-->
 
 
+            <!--           Circular  Add new Task-->
             <ImageView
                 android:id="@+id/fab_add_task"
                 android:layout_width="35dp"
@@ -48,6 +48,134 @@
                 app:layout_constraintTop_toTopOf="parent"
 
                 />
+
+
+            <!--            Cancel view -->
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_top_round_cancel"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="@string/cancel"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="normal"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+
+            <!--            Options Dismissible Layout-->
+            <androidx.wear.widget.SwipeDismissFrameLayout
+                android:id="@+id/swipe_to_dismiss"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    >
+
+                    <!--Speak-->
+                    <LinearLayout
+                        android:id="@+id/layout_speak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="7dp"
+                        android:background="@drawable/bg_rounded_option"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="15dp">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:padding="7dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_add_new_task"
+                            app:fabSize="mini"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+
+                            />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/speak"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+
+                            />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/layout_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_rounded_option"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="15dp">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:padding="7dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_add_new_task"
+                            app:fabSize="mini"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+
+                            />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/speak"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+
+                            />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </androidx.wear.widget.SwipeDismissFrameLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
