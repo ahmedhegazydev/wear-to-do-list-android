@@ -7,4 +7,5 @@
     <string name="hello_world">Hello Square World!</string>
     <string name="cancel">Cancel</string>
     <string name="speak">Speak</string>
+    <string name="type">Type</string>
 </resources>

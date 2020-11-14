@@ -34,10 +34,10 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
     }
 
     private fun setSwipeDismissCallBack() {
-        db.swipeToDismiss.addCallback(object : SwipeDismissFrameLayout.Callback() {
+        db.layoutSwipe.swipeToDismiss.addCallback(object : SwipeDismissFrameLayout.Callback() {
             override fun onDismissed(layout: SwipeDismissFrameLayout?) {
                 Log.e(TAG, "onDismissed: ")
-                db.swipeToDismiss.visibility = View.GONE
+                db.layoutSwipe.swipeToDismiss.visibility = View.GONE
 
             }
 
@@ -68,7 +68,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 
     private fun addNewTask() {
 //        this.toast("Adding new task")
-        db.swipeToDismiss.visibility = View.VISIBLE
+        db.layoutSwipe.swipeToDismiss.visibility = View.VISIBLE
 
     }
 
@@ -76,9 +76,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         return MyAmbientCallback()
     }
 
-    private class MyAmbientCallback : AmbientModeSupport.AmbientCallback() {
-
-    }
+    private class MyAmbientCallback : AmbientModeSupport.AmbientCallback()
 
 
 }
