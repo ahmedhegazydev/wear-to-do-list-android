@@ -28,7 +28,6 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 
 {
 
-
     private lateinit var noteViewModel: NoteViewModel
     private val adapter = NoteAdapter()
     lateinit var db: ActivityMainBinding
@@ -54,7 +53,6 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 //        noteViewModel.deleteAllNotes()
         refreshRvNotes()
 //        insertDummyDataToRoomDb()
-
     }
 
     /**
@@ -85,9 +83,14 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
             if (notes.isNotEmpty()) {
                 db.rvNotes.visibility = View.VISIBLE
                 db.fabAddTask.visibility = View.GONE
+                db.viewBottomAddTask.visibility = View.VISIBLE
+
             } else {
                 db.rvNotes.visibility = View.GONE
                 db.fabAddTask.visibility = View.VISIBLE
+                db.viewBottomAddTask.visibility = View.GONE
+
+
             }
 
         })
@@ -183,7 +186,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 
     private fun setOnClickListener() {
         db.fabAddTask.setOnClickListener {
-            addNewTask()
+            addNewTask(false)
         }
 
         db.tvCancel.setOnClickListener {
@@ -199,23 +202,32 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
                 }
                 R.id.layout_speak -> {
                     Log.e(TAG, "setOnClickListener: ")
-
                 }
             }
+        }
+
+        db.viewBottomAddTask.setOnClickListener {
+            addNewTask(true)
         }
 
 
     }
 
-    private fun addNewTask() {
+    private fun addNewTask(bottomToTop: Boolean) {
 //        this.toast("Adding new task")
 //        db.layoutSwipe.visibility = View.VISIBLE
         db.visibility = View.VISIBLE
 
-        YoYo.with(Techniques.SlideInRight)
-            .duration(350)
-            .playOn(db.layoutSwipe.root)
 
+        if (bottomToTop) {
+            YoYo.with(Techniques.SlideInDown)
+                .duration(350)
+                .playOn(db.layoutSwipe.root)
+        } else {
+            YoYo.with(Techniques.SlideInRight)
+                .duration(350)
+                .playOn(db.layoutSwipe.root)
+        }
 
     }
 
