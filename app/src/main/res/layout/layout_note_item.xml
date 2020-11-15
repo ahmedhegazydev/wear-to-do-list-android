@@ -42,6 +42,7 @@
             android:paddingStart="5dp"
             android:singleLine="true"
             android:text="Today"
+            android:paddingBottom="2dp"
             android:textColor="#202020"
             android:textSize="14sp"
             android:textStyle="bold"

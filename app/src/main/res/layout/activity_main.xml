@@ -30,6 +30,7 @@
             android:layout_height="match_parent">
 
 
+            <!--            RecyclreView notes-->
             <androidx.wear.widget.WearableRecyclerView
                 android:id="@+id/rv_notes"
                 android:layout_width="match_parent"
@@ -102,10 +103,9 @@
                 android:id="@+id/view_bottom_add_task"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#729C27B0"
+                android:background="#FF9800"
                 android:clickable="true"
                 android:focusable="true"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -143,6 +143,31 @@
                 android:visibility="@{visibility}"
                 app:onWidgetClicked="@{onWidgetClicked}"
                 tools:visibility="gone" />
+
+
+            <!--            view top for navigation-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/view_top_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FF9800"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_more_navigation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
