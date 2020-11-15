@@ -24,9 +24,18 @@ import com.heagzy.myapplication.viewmodels.NoteViewModel
 
 
 class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvider
+//class MainActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider
 //    ,NoteAdapter.OnItemClickHandler
 
 {
+
+
+    /*
+     * Declare an ambient mode controller, which will be used by
+     * the activity to determine if the current mode is ambient.
+     */
+    private lateinit var ambientController: AmbientModeSupport.AmbientController
+
 
     private lateinit var noteViewModel: NoteViewModel
     private val adapter = NoteAdapter()
@@ -40,6 +49,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 //        setContentView(R.layout.activity_main)
         db = DataBindingUtil.setContentView(this, R.layout.activity_main)
         db.visibility = View.GONE
+        ambientController = AmbientModeSupport.attach(this)
 
     }
 
