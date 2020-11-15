@@ -15,6 +15,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@drawable/bg_ripple_recycler_item"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_height="wrap_content"
         app:boxedEdges="all">
 

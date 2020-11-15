@@ -1,15 +1,16 @@
 package com.heagzy.myapplication.ui.activities
 
+import android.animation.Animator
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.widget.SwipeDismissFrameLayout
 import androidx.wear.widget.WearableLinearLayoutManager
+import com.airbnb.lottie.LottieAnimationView
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.heagzy.myapplication.CustomScrollingLayoutCallback
@@ -18,6 +19,7 @@ import com.heagzy.myapplication.RecyclerItemClickListener
 import com.heagzy.myapplication.adapters.NoteAdapter
 import com.heagzy.myapplication.databinding.ActivityMainBinding
 import com.heagzy.myapplication.room.Note
+import com.heagzy.myapplication.room.STATUS
 import com.heagzy.myapplication.viewmodels.NoteViewModel
 
 
@@ -31,6 +33,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
     private val adapter = NoteAdapter()
     lateinit var db: ActivityMainBinding
     private val TAG = "MainActivity"
+    private var notes: List<Note> = arrayListOf()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +79,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 
     private fun refreshRvNotes() {
         noteViewModel.getAllNotes().observe(this, { notes ->
+            this.notes = notes
             adapter.setNotes(notes!!)
 //            notes.size
             if (notes.isNotEmpty()) {
@@ -119,12 +123,40 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
             RecyclerItemClickListener(
                 this@MainActivity
             ) { v, position ->
-                Toast.makeText(this, "" + position, Toast.LENGTH_SHORT).show()
-
-
+//                Toast.makeText(this, "" + position, Toast.LENGTH_SHORT).show()
+                doActionOnItemClicked(v, position)
             }
         )
 
+    }
+
+    private fun doActionOnItemClicked(v: View?, position: Int) {
+        val note = notes[position]
+        note.status = STATUS.COMPLETED.name
+        noteViewModel.updateNote(note)
+        val lottieDoneView =
+            v?.findViewById<LottieAnimationView>(R.id.lottie_done)
+        lottieDoneView?.visibility = View.VISIBLE
+        lottieDoneView?.playAnimation()
+        lottieDoneView?.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator?) {
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+//                holder.imageViewCheck.visibility = View.GONE
+//                holder.imageViewDone.visibility = View.VISIBLE
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {
+
+            }
+
+            override fun onAnimationRepeat(animation: Animator?) {
+
+            }
+
+
+        })
     }
 
     private fun setSwipeDismissCallBack() {
@@ -196,29 +228,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
     //    override fun onNoteClicked(currentNote: Note) {
 //    override fun onNoteClicked(view: View, note: Note) {
 //    override fun onNoteClicked(holder: NoteAdapter.NoteHolder, note: Note) {
-
-//        note.status = STATUS.COMPLETED.name
-//        noteViewModel.updateNote(note)
-//        holder.lottieDoneView.playAnimation()
-//        holder.lottieDoneView.addAnimatorListener(object : Animator.AnimatorListener {
-//            override fun onAnimationStart(animation: Animator?) {
-//            }
-//
-//            override fun onAnimationEnd(animation: Animator?) {
-////                holder.imageViewCheck.visibility = View.GONE
-////                holder.imageViewDone.visibility = View.VISIBLE
-//            }
-//
-//            override fun onAnimationCancel(animation: Animator?) {
-//
-//            }
-//
-//            override fun onAnimationRepeat(animation: Animator?) {
-//
-//            }
-//
-//
-//        })
+//    doActionOnItemClicked()
 //
 //    }
 
