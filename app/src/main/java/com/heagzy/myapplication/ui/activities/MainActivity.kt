@@ -11,6 +11,7 @@ import androidx.wear.widget.SwipeDismissFrameLayout
 import androidx.wear.widget.WearableLinearLayoutManager
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
+import com.heagzy.myapplication.CustomScrollingLayoutCallback
 import com.heagzy.myapplication.R
 import com.heagzy.myapplication.adapters.NoteAdapter
 import com.heagzy.myapplication.databinding.ActivityMainBinding
@@ -42,9 +43,9 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         setSwipeDismissCallBack()
         setOnClickListener()
         initRvNotes()
+//        noteViewModel.deleteAllNotes()
         refreshRvNotes()
 //        insertDummyDataToRoomDb()
-
 
     }
 
@@ -55,6 +56,17 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         noteViewModel.insert(Note("Title 1", "description 1"))
         noteViewModel.insert(Note("Title 2", "description 2"))
         noteViewModel.insert(Note("Title 3", "description 3"))
+        noteViewModel.insert(Note("Title 3", "description 3"))
+        noteViewModel.insert(Note("Title 3", "description 3"))
+        noteViewModel.insert(Note("Title 3", "description 3"))
+        noteViewModel.insert(Note("Title 3", "description 3"))
+        noteViewModel.insert(Note("Title 3", "description 3"))
+        noteViewModel.insert(Note("Title 3", "description 3"))
+        noteViewModel.insert(Note("Title 3", "description 3"))
+        noteViewModel.insert(Note("Title 3", "description 3"))
+        noteViewModel.insert(Note("Title 3", "description 3"))
+        noteViewModel.insert(Note("Title 3", "description 3"))
+        noteViewModel.insert(Note("Title 3", "description 3"))
     }
 
     private fun refreshRvNotes() {
@@ -64,7 +76,9 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
             if (notes.isNotEmpty()) {
                 db.rvNotes.visibility = View.VISIBLE
                 db.fabAddTask.visibility = View.GONE
-
+            } else {
+                db.rvNotes.visibility = View.GONE
+                db.fabAddTask.visibility = View.VISIBLE
             }
 
         })
@@ -83,8 +97,12 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         db.rvNotes.apply {
             // To align the edge children (first and last) with the center of the screen
 //            isEdgeItemsCenteringEnabled = true
-            layoutManager = WearableLinearLayoutManager(this@MainActivity)
+//            layoutManager = WearableLinearLayoutManager(this@MainActivity)
+            layoutManager =
+                WearableLinearLayoutManager(this@MainActivity, CustomScrollingLayoutCallback())
         }
+
+
 
 
         db.rvNotes.adapter = adapter

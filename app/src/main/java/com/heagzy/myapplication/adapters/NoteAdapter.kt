@@ -3,6 +3,7 @@ package com.heagzy.myapplication.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -22,6 +23,12 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteHolder>() {
         val currentNote = notes[position]
         holder.tvNotes.text = currentNote.description
 
+
+//        holder.imageViewCheck.setOnClickListener {
+        holder.itemView.setOnClickListener {
+            holder.imageViewCheck.visibility = View.GONE
+            holder.lottieDoneView.playAnimation()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -37,6 +44,7 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteHolder>() {
     inner class NoteHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //        var radio: RadioButton = itemView.findViewById(R.id.radio)
         var lottieDoneView: LottieAnimationView = itemView.findViewById(R.id.lottie_done)
+        var imageViewCheck: ImageView = itemView.findViewById(R.id.image_view_check)
         var tvNotes: TextView = itemView.findViewById(R.id.tv_notes)
 
     }
