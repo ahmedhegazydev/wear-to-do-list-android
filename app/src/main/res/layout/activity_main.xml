@@ -11,7 +11,6 @@
             name="onWidgetClicked"
             type="android.view.View.OnClickListener" />
 
-
         <variable
             name="visibility"
             type="Integer" />
@@ -28,8 +27,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:boxedEdges="all">
+            android:layout_height="match_parent">
 
 
             <!--            <androidx.wear.widget.WearableRecyclerView-->
@@ -38,6 +36,21 @@
             <!--                android:id="@+id/rv_notes"-->
             <!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
             <!--                />-->
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_notes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:scrollbarSize="5dp"
+                android:scrollbars="vertical"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/layout_note_item"
+
+                />
 
 
             <!--           Circular  Add new Task-->
@@ -80,8 +93,8 @@
                 layout="@layout/layout_swipe_options"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:onWidgetClicked="@{onWidgetClicked}"
                 android:visibility="@{visibility}"
+                app:onWidgetClicked="@{onWidgetClicked}"
                 tools:visibility="gone" />
 
 

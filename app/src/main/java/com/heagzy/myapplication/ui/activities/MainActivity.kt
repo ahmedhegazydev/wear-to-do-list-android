@@ -5,30 +5,72 @@ import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.widget.SwipeDismissFrameLayout
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.heagzy.myapplication.R
+import com.heagzy.myapplication.adapters.NoteAdapter
 import com.heagzy.myapplication.databinding.ActivityMainBinding
+import com.heagzy.myapplication.room.Note
+import com.heagzy.myapplication.viewmodels.NoteViewModel
 
 
 class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvider {
 
 
+    private lateinit var noteViewModel: NoteViewModel
+    private val adapter = NoteAdapter()
     lateinit var db: ActivityMainBinding
     private val TAG = "MainActivity"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
 //        setContentView(R.layout.activity_main)
         db = DataBindingUtil.setContentView(this, R.layout.activity_main)
         db.visibility = View.GONE
+
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+
+        init()
         setSwipeDismissCallBack()
         setOnClickListener()
+        initRvNotes()
+        refreshRvNotes()
+        insertDummyDataToRoomDb()
+
+    }
+
+    private fun insertDummyDataToRoomDb() {
+
+        noteViewModel.insert(Note("Title 1", "description 1"))
+        noteViewModel.insert(Note("Title 2", "description 2"))
+        noteViewModel.insert(Note("Title 3", "description 3"))
+
+
+    }
+
+    private fun refreshRvNotes() {
+        noteViewModel.getAllNotes().observe(this, { t ->
+            adapter.setNotes(t!!)
+        })
+    }
+
+    private fun init() {
+        noteViewModel = ViewModelProviders.of(this).get(NoteViewModel::class.java)
+    }
+
+    private fun initRvNotes() {
+
+        db.rvNotes.layoutManager = LinearLayoutManager(this)
+        db.rvNotes.setHasFixedSize(true)
+        db.rvNotes.adapter = adapter
 
     }
 
