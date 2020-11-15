@@ -6,9 +6,9 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.widget.SwipeDismissFrameLayout
+import androidx.wear.widget.WearableLinearLayoutManager
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.heagzy.myapplication.R
@@ -43,22 +43,30 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         setOnClickListener()
         initRvNotes()
         refreshRvNotes()
-        insertDummyDataToRoomDb()
+//        insertDummyDataToRoomDb()
+
 
     }
 
+    /**
+     * insertDummyDataToRoomDb
+     */
     private fun insertDummyDataToRoomDb() {
-
         noteViewModel.insert(Note("Title 1", "description 1"))
         noteViewModel.insert(Note("Title 2", "description 2"))
         noteViewModel.insert(Note("Title 3", "description 3"))
-
-
     }
 
     private fun refreshRvNotes() {
-        noteViewModel.getAllNotes().observe(this, { t ->
-            adapter.setNotes(t!!)
+        noteViewModel.getAllNotes().observe(this, { notes ->
+            adapter.setNotes(notes!!)
+//            notes.size
+            if (notes.isNotEmpty()) {
+                db.rvNotes.visibility = View.VISIBLE
+                db.fabAddTask.visibility = View.GONE
+
+            }
+
         })
     }
 
@@ -68,8 +76,17 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 
     private fun initRvNotes() {
 
-        db.rvNotes.layoutManager = LinearLayoutManager(this)
-        db.rvNotes.setHasFixedSize(true)
+//        db.rvNotes.layoutManager = LinearLayoutManager(this)
+//        db.rvNotes.setHasFixedSize(true)
+
+
+        db.rvNotes.apply {
+            // To align the edge children (first and last) with the center of the screen
+//            isEdgeItemsCenteringEnabled = true
+            layoutManager = WearableLinearLayoutManager(this@MainActivity)
+        }
+
+
         db.rvNotes.adapter = adapter
 
     }

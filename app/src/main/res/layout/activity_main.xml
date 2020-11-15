@@ -30,27 +30,37 @@
             android:layout_height="match_parent">
 
 
-            <!--            <androidx.wear.widget.WearableRecyclerView-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="match_parent"-->
-            <!--                android:id="@+id/rv_notes"-->
-            <!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-            <!--                />-->
-
-
-            <androidx.recyclerview.widget.RecyclerView
+            <androidx.wear.widget.WearableRecyclerView
                 android:id="@+id/rv_notes"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#FF00FF"
                 android:orientation="vertical"
-                android:scrollbarSize="5dp"
+                android:paddingStart="40dp"
+                android:paddingTop="40dp"
+                android:paddingBottom="40dp"
+                android:scrollbarSize="3dp"
                 android:scrollbars="vertical"
-                android:visibility="gone"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="5"
                 tools:listitem="@layout/layout_note_item"
 
                 />
+
+
+            <!--            <androidx.recyclerview.widget.RecyclerView-->
+            <!--                android:id="@+id/rv_notes"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:orientation="vertical"-->
+            <!--                android:scrollbarSize="5dp"-->
+            <!--                android:padding="20dp"-->
+            <!--                android:scrollbars="vertical"-->
+            <!--                android:visibility="visible"-->
+            <!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+            <!--                tools:itemCount="5"-->
+            <!--                tools:listitem="@layout/layout_note_item"-->
+
+            <!--                />-->
 
 
             <!--           Circular  Add new Task-->
