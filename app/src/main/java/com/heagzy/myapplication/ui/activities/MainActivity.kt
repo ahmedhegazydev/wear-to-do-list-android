@@ -219,15 +219,25 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         db.visibility = View.VISIBLE
 
 
+        var tech = Techniques.SlideInUp
+
         if (bottomToTop) {
-            YoYo.with(Techniques.SlideInDown)
-                .duration(350)
-                .playOn(db.layoutSwipe.root)
+//            YoYo.with(Techniques.SlideInDown)
+//            YoYo.with(Techniques.SlideInUp)
+//                .duration(350)
+//                .playOn(db.layoutSwipe.root)
+            tech = Techniques.SlideInUp
         } else {
-            YoYo.with(Techniques.SlideInRight)
-                .duration(350)
-                .playOn(db.layoutSwipe.root)
+//            YoYo.with(Techniques.SlideInRight)
+//                .duration(350)
+//                .playOn(db.layoutSwipe.root)
+            tech = Techniques.SlideInRight
+
         }
+
+        YoYo.with(tech)
+            .duration(350)
+            .playOn(db.layoutSwipe.root)
 
     }
 
