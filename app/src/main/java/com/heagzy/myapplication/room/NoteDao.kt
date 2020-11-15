@@ -1,9 +1,8 @@
 package com.heagzy.myapplication.room
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
+
 
 @Dao
 interface NoteDao {
@@ -16,5 +15,34 @@ interface NoteDao {
 
     @Query("SELECT * FROM notes_table ")
     fun getAllNotes(): LiveData<List<Note>>
+
+    @Update
+    fun update(note: Note?)
+
+    @Delete
+    fun delete(note: Note?)
+
+
+    /**
+     * Updating only price
+     * By order id
+     */
+//    @Query("UPDATE orders SET notes_table=:price WHERE order_id = :id")
+//    fun update(price: Float?, id: Int)
+
+    /**
+     * Updating only amount and price
+     * By order id
+     */
+//    @Query("UPDATE orders SET order_amount = :amount, price = :price WHERE order_id =:id")
+//    fun update(amount: Float?, price: Float?, id: Int)
+
+    /**
+     * Updating only title and description
+     * By order id
+     */
+//    @Query("UPDATE orders SET order_desc = :description, order_title= :title WHERE order_id =:id")
+//    fun update(description: String?, title: String?, id: Int)
+
 
 }

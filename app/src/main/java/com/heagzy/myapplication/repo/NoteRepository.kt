@@ -32,6 +32,16 @@ class NoteRepository(application: Application) {
         ).execute()
     }
 
+
+    fun update(note: Note) {
+        val updateNoteAsyncTask = UpdateNoteAsyncTask(
+            noteDao
+        ).apply {
+            execute(note)
+        }
+    }
+
+
     fun getAllNotes(): LiveData<List<Note>> {
         return allNotes
     }
@@ -50,6 +60,16 @@ class NoteRepository(application: Application) {
         override fun doInBackground(vararg p0: Unit?) {
             noteDao.deleteAllNotes()
         }
+    }
+
+
+    private class UpdateNoteAsyncTask(val noteDao: NoteDao) : AsyncTask<Note, Unit, Unit>() {
+
+        override fun doInBackground(vararg params: Note?) {
+            noteDao.update(note = params[0])
+        }
+
+
     }
 
 }

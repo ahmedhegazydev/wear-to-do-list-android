@@ -23,4 +23,10 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     fun getAllNotes(): LiveData<List<Note>> {
         return allNotes
     }
+
+    fun updateNote(note: Note) {
+        repository.update(note)
+    }
+
+
 }

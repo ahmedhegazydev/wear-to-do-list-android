@@ -6,7 +6,7 @@ import androidx.wear.widget.WearableLinearLayoutManager
 import kotlin.math.abs
 
 /** How much should we scale the icon at most.  */
-private const val MAX_ICON_PROGRESS = 0.50f
+private const val MAX_ICON_PROGRESS = 0.40f
 
 class CustomScrollingLayoutCallback : WearableLinearLayoutManager.LayoutCallback() {
 

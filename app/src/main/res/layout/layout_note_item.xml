@@ -65,6 +65,21 @@
                 app:lottie_url="REPLACE_JSON_URL" />
 
 
+            <ImageView
+                android:id="@+id/image_view_done"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/green"
+                android:src="@drawable/ic_note_done_white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

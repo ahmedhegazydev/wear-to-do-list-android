@@ -1,7 +1,13 @@
 package com.heagzy.myapplication.room
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+
+enum class STATUS {
+    COMPLETED,
+}
+
 
 @Entity(tableName = "notes_table")
 data class Note(
@@ -11,5 +17,9 @@ data class Note(
 
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+
+    @ColumnInfo(name = "note_status")
+    var status: String = ""
+
 
 }
