@@ -84,6 +84,14 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         refreshRvNotes()
 
 
+
+        db.layoutSwipe.closeDetails.setOnClickListener {
+            db.visibility = View.VISIBLE
+            YoYo.with(Techniques.SlideOutRight)
+                .duration(350)
+                .playOn(db.layoutSwipe.root)
+        }
+
     }
 
     /**
@@ -171,7 +179,6 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
                     it
                 )
             }
-
         }
 
 
@@ -215,10 +222,20 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 //            override fun onAnimationRepeat(animation: Animator?) {
 //
 //            }
-//
-//
 //        })
 
+
+        //show details view
+        db.visibility = View.VISIBLE
+        YoYo.with(Techniques.SlideInRight)
+            .duration(350)
+            .onEnd {
+                db.layoutSwipe.tvEmpName.text = note.empployeName
+                db.layoutSwipe.tvEmpDept.text = note.employeeDept
+                db.layoutSwipe.tvEmpAge.text = note.empployeAge.toString()
+
+            }
+            .playOn(db.layoutSwipe.root)
 
     }
 
@@ -348,6 +365,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 //        db.layoutSwipe.visibility  = View.GONE
 //        val note = Note("", description = spokenText.toString())
 //        noteViewModel.insert(note)
+
 
     }
 
