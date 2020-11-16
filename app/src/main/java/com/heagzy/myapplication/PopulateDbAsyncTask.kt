@@ -1,9 +1,9 @@
 package com.heagzy.myapplication
 
 import android.os.AsyncTask
-import com.heagzy.myapplication.room.NoteDatabase
+import com.heagzy.myapplication.room.EmployeeDatabase
 
-class PopulateDbAsyncTask(db: NoteDatabase?) : AsyncTask<Unit, Unit, Unit>() {
+class PopulateDbAsyncTask(db: EmployeeDatabase?) : AsyncTask<Unit, Unit, Unit>() {
     private val noteDao = db?.noteDao()
 
     override fun doInBackground(vararg p0: Unit?) {

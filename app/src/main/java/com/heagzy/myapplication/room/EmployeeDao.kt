@@ -2,17 +2,18 @@ package com.heagzy.myapplication.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.heagzy.myapplication.room.models.Note
 
 
 @Dao
-interface NoteDao {
+interface EmployeeDao {
 
     @Insert
     fun insert(note: Note)
 
-//    @Query("DELETE FROM notes_table")
-@Query("DELETE FROM employees_table")
-fun deleteAllNotes()
+    //    @Query("DELETE FROM notes_table")
+    @Query("DELETE FROM employees_table")
+    fun deleteAllNotes()
 
     //    @Query("SELECT * FROM notes_table ")
     @Query("SELECT * FROM employees_table ")

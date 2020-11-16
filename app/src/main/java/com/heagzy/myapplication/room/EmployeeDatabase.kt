@@ -4,21 +4,22 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.heagzy.myapplication.room.models.Note
 
 @Database(entities = [Note::class], version = 4)
-abstract class NoteDatabase : RoomDatabase() {
+abstract class EmployeeDatabase : RoomDatabase() {
 
-    abstract fun noteDao(): NoteDao
+    abstract fun noteDao(): EmployeeDao
 
 
     companion object {
-        private var instance: NoteDatabase? = null
-        fun getNoteDbInstance(context: Context): NoteDatabase? {
+        private var instance: EmployeeDatabase? = null
+        fun getNoteDbInstance(context: Context): EmployeeDatabase? {
             if (instance == null) {
-                synchronized(NoteDatabase::class) {
+                synchronized(EmployeeDatabase::class) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
-                        NoteDatabase::class.java, "notes_database"
+                        EmployeeDatabase::class.java, "notes_database"
                     )
                         .fallbackToDestructiveMigration()
 //                    .addCallback(roomCallback)

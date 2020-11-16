@@ -1,4 +1,4 @@
-package com.heagzy.myapplication.room
+package com.heagzy.myapplication.room.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

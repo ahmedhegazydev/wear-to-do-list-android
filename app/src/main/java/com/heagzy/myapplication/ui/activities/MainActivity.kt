@@ -19,7 +19,7 @@ import com.daimajia.androidanimations.library.YoYo
 import com.heagzy.myapplication.R
 import com.heagzy.myapplication.adapters.NoteAdapter
 import com.heagzy.myapplication.databinding.ActivityMainBinding
-import com.heagzy.myapplication.room.Note
+import com.heagzy.myapplication.room.models.Note
 import com.heagzy.myapplication.ui.dialogs.DepartmentsDialog
 import com.heagzy.myapplication.ui.dialogs.DepartmentsDialog.LocationsOtionsListener
 import com.heagzy.myapplication.utils.CustomScrollingLayoutCallback

@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.heagzy.myapplication.repo.NoteRepository
-import com.heagzy.myapplication.room.Note
+import com.heagzy.myapplication.room.models.Note
 
 class NoteViewModel(application: Application) : AndroidViewModel(application) {
 

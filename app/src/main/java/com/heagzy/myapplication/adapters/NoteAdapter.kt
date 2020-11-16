@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.heagzy.myapplication.R
-import com.heagzy.myapplication.room.Note
+import com.heagzy.myapplication.room.models.Note
 
 class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteHolder>() {
     private var notes: List<Note> = ArrayList()
