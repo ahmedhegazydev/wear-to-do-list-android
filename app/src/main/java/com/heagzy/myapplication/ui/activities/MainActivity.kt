@@ -17,11 +17,14 @@ import androidx.wear.widget.WearableLinearLayoutManager
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.heagzy.myapplication.CustomScrollingLayoutCallback
+import com.heagzy.myapplication.DepartmentsDialog
+import com.heagzy.myapplication.DepartmentsDialog.LocationsOtionsListener
 import com.heagzy.myapplication.R
 import com.heagzy.myapplication.RecyclerItemClickListener
 import com.heagzy.myapplication.adapters.NoteAdapter
 import com.heagzy.myapplication.databinding.ActivityMainBinding
 import com.heagzy.myapplication.room.Note
+import com.heagzy.myapplication.utils.toast
 import com.heagzy.myapplication.viewmodels.NoteViewModel
 import kotlin.random.Random
 
@@ -61,8 +64,9 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
     private val adapter = NoteAdapter()
     lateinit var db: ActivityMainBinding
     private val TAG = "MainActivity"
-    private var notes: List<Note> = arrayListOf()
+    private var selectedEmp: Note? = null
 
+    private var notes: List<Note> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,6 +94,24 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
             YoYo.with(Techniques.SlideOutRight)
                 .duration(350)
                 .playOn(db.layoutSwipe.root)
+        }
+
+
+        db.layoutSwipe.layoutDept.setOnClickListener {
+            DepartmentsDialog.showDialog(this, object : LocationsOtionsListener {
+
+                override fun onChooseDept(type: String) {
+                    selectedEmp?.employeeDept = type
+                    selectedEmp?.let { it1 ->
+                        noteViewModel.updateNote(it1)
+//                        db.layoutSwipe.closeDetails.performClick()
+//                        adapter.notifyDataSetChanged()
+                        db.layoutSwipe.tvEmpDept.text = selectedEmp?.employeeDept
+                        toast(selectedEmp?.empployeName.plus(" Updated success"))
+                    }
+                }
+
+            })
         }
 
     }
@@ -199,7 +221,10 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
     }
 
     private fun doActionOnItemClicked(v: View?, position: Int) {
-        val note = notes[position]
+//        val note = notes[position]
+        selectedEmp = notes[position]
+
+
 //        note.status = STATUS.COMPLETED.name
 //        noteViewModel.updateNote(note)
 //        val lottieDoneView =
@@ -230,14 +255,15 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         YoYo.with(Techniques.SlideInRight)
             .duration(350)
             .onEnd {
-                db.layoutSwipe.tvEmpName.text = note.empployeName
-                db.layoutSwipe.tvEmpDept.text = note.employeeDept
-                db.layoutSwipe.tvEmpAge.text = note.empployeAge.toString()
+                db.layoutSwipe.tvEmpName.text = selectedEmp?.empployeName
+                db.layoutSwipe.tvEmpDept.text = selectedEmp?.employeeDept
+                db.layoutSwipe.tvEmpAge.text = selectedEmp?.empployeAge.toString()
 
             }
             .playOn(db.layoutSwipe.root)
 
     }
+
 
     private fun setSwipeDismissCallBack() {
         db.layoutSwipe.swipeToDismiss.addCallback(object : SwipeDismissFrameLayout.Callback() {
