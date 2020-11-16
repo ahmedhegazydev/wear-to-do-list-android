@@ -10,10 +10,12 @@ interface NoteDao {
     @Insert
     fun insert(note: Note)
 
-    @Query("DELETE FROM notes_table")
-    fun deleteAllNotes()
+//    @Query("DELETE FROM notes_table")
+@Query("DELETE FROM employees_table")
+fun deleteAllNotes()
 
-    @Query("SELECT * FROM notes_table ")
+    //    @Query("SELECT * FROM notes_table ")
+    @Query("SELECT * FROM employees_table ")
     fun getAllNotes(): LiveData<List<Note>>
 
     @Update

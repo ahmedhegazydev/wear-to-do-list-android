@@ -1,16 +1,19 @@
 package com.heagzy.myapplication.ui.activities
 
-import android.animation.Animator
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.widget.SwipeDismissFrameLayout
 import androidx.wear.widget.WearableLinearLayoutManager
-import com.airbnb.lottie.LottieAnimationView
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.heagzy.myapplication.CustomScrollingLayoutCallback
@@ -19,8 +22,8 @@ import com.heagzy.myapplication.RecyclerItemClickListener
 import com.heagzy.myapplication.adapters.NoteAdapter
 import com.heagzy.myapplication.databinding.ActivityMainBinding
 import com.heagzy.myapplication.room.Note
-import com.heagzy.myapplication.room.STATUS
 import com.heagzy.myapplication.viewmodels.NoteViewModel
+import kotlin.random.Random
 
 
 class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvider
@@ -30,13 +33,30 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 {
 
 
+    enum class TYPE_DEPT constructor(pos: Int) {
+        HR(0), Software(1), Finance(2);
+
+        companion object {
+            fun toDeptName(pos: Int): String {
+                return when (pos) {
+                    0 -> {
+                        return HR.name
+                    }
+                    1 -> {
+                        return Software.name
+                    }
+                    else -> return Finance.name
+                }
+            }
+        }
+    }
+
+
     /*
      * Declare an ambient mode controller, which will be used by
      * the activity to determine if the current mode is ambient.
      */
     private lateinit var ambientController: AmbientModeSupport.AmbientController
-
-
     private lateinit var noteViewModel: NoteViewModel
     private val adapter = NoteAdapter()
     lateinit var db: ActivityMainBinding
@@ -62,27 +82,38 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         initRvNotes()
 //        noteViewModel.deleteAllNotes()
         refreshRvNotes()
-//        insertDummyDataToRoomDb()
+
+
     }
 
     /**
      * insertDummyDataToRoomDb
      */
     private fun insertDummyDataToRoomDb() {
-        noteViewModel.insert(Note("Title 1", "description 1"))
-        noteViewModel.insert(Note("Title 2", "description 2"))
-        noteViewModel.insert(Note("Title 3", "description 3"))
-        noteViewModel.insert(Note("Title 3", "description 3"))
-        noteViewModel.insert(Note("Title 3", "description 3"))
-        noteViewModel.insert(Note("Title 3", "description 3"))
-        noteViewModel.insert(Note("Title 3", "description 3"))
-        noteViewModel.insert(Note("Title 3", "description 3"))
-        noteViewModel.insert(Note("Title 3", "description 3"))
-        noteViewModel.insert(Note("Title 3", "description 3"))
-        noteViewModel.insert(Note("Title 3", "description 3"))
-        noteViewModel.insert(Note("Title 3", "description 3"))
-        noteViewModel.insert(Note("Title 3", "description 3"))
-        noteViewModel.insert(Note("Title 3", "description 3"))
+//        noteViewModel.insert(Note("Title 1", "description 1"))
+//        noteViewModel.insert(Note("Title 2", "description 2"))
+//        noteViewModel.insert(Note("Title 3", "description 3"))
+//        noteViewModel.insert(Note("Title 3", "description 3"))
+//        noteViewModel.insert(Note("Title 3", "description 3"))
+//        noteViewModel.insert(Note("Title 3", "description 3"))
+//        noteViewModel.insert(Note("Title 3", "description 3"))
+//        noteViewModel.insert(Note("Title 3", "description 3"))
+//        noteViewModel.insert(Note("Title 3", "description 3"))
+//        noteViewModel.insert(Note("Title 3", "description 3"))
+//        noteViewModel.insert(Note("Title 3", "description 3"))
+//        noteViewModel.insert(Note("Title 3", "description 3"))
+//        noteViewModel.insert(Note("Title 3", "description 3"))
+//        noteViewModel.insert(Note("Title 3", "description 3"))
+
+
+        repeat(30) { pos ->
+            val rand = Random.nextInt(3)
+            val typeDept = TYPE_DEPT.toDeptName(rand)
+
+            val age = Random.nextInt(100)
+            noteViewModel.insert(Note("Employee ".plus(pos), typeDept, age))
+        }
+
     }
 
     private fun refreshRvNotes() {
@@ -91,14 +122,17 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
             adapter.setNotes(notes!!)
 //            notes.size
             if (notes.isNotEmpty()) {
-                db.rvNotes.visibility = View.VISIBLE
-                db.fabAddTask.visibility = View.GONE
-                db.viewBottomAddTask.visibility = View.VISIBLE
+//                db.rvNotes.visibility = View.VISIBLE
+//                db.fabAddTask.visibility = View.GONE
+//                db.viewBottomAddTask.visibility = View.VISIBLE
+
 
             } else {
-                db.rvNotes.visibility = View.GONE
-                db.fabAddTask.visibility = View.VISIBLE
-                db.viewBottomAddTask.visibility = View.GONE
+//                db.rvNotes.visibility = View.GONE
+//                db.fabAddTask.visibility = View.VISIBLE
+//                db.viewBottomAddTask.visibility = View.GONE
+
+                insertDummyDataToRoomDb()
 
 
             }
@@ -125,6 +159,19 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 //            layoutManager = WearableLinearLayoutManager(this@MainActivity)
             layoutManager =
                 WearableLinearLayoutManager(this@MainActivity, CustomScrollingLayoutCallback())
+
+
+            val dividerItemDecoration = DividerItemDecoration(
+                this@MainActivity,
+                WearableLinearLayoutManager.VERTICAL
+            )
+            db.rvNotes.addItemDecoration(dividerItemDecoration)
+            ContextCompat.getDrawable(this@MainActivity, R.drawable.divider)?.let {
+                dividerItemDecoration.setDrawable(
+                    it
+                )
+            }
+
         }
 
 
@@ -141,35 +188,38 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
             }
         )
 
+
     }
 
     private fun doActionOnItemClicked(v: View?, position: Int) {
         val note = notes[position]
-        note.status = STATUS.COMPLETED.name
-        noteViewModel.updateNote(note)
-        val lottieDoneView =
-            v?.findViewById<LottieAnimationView>(R.id.lottie_done)
-        lottieDoneView?.visibility = View.VISIBLE
-        lottieDoneView?.playAnimation()
-        lottieDoneView?.addAnimatorListener(object : Animator.AnimatorListener {
-            override fun onAnimationStart(animation: Animator?) {
-            }
+//        note.status = STATUS.COMPLETED.name
+//        noteViewModel.updateNote(note)
+//        val lottieDoneView =
+//            v?.findViewById<LottieAnimationView>(R.id.lottie_done)
+//        lottieDoneView?.visibility = View.VISIBLE
+//        lottieDoneView?.playAnimation()
+//        lottieDoneView?.addAnimatorListener(object : Animator.AnimatorListener {
+//            override fun onAnimationStart(animation: Animator?) {
+//            }
+//
+//            override fun onAnimationEnd(animation: Animator?) {
+////                holder.imageViewCheck.visibility = View.GONE
+////                holder.imageViewDone.visibility = View.VISIBLE
+//            }
+//
+//            override fun onAnimationCancel(animation: Animator?) {
+//
+//            }
+//
+//            override fun onAnimationRepeat(animation: Animator?) {
+//
+//            }
+//
+//
+//        })
 
-            override fun onAnimationEnd(animation: Animator?) {
-//                holder.imageViewCheck.visibility = View.GONE
-//                holder.imageViewDone.visibility = View.VISIBLE
-            }
 
-            override fun onAnimationCancel(animation: Animator?) {
-
-            }
-
-            override fun onAnimationRepeat(animation: Animator?) {
-
-            }
-
-
-        })
     }
 
     private fun setSwipeDismissCallBack() {
@@ -211,7 +261,9 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 
                 }
                 R.id.layout_speak -> {
-                    Log.e(TAG, "setOnClickListener: ")
+//                    Log.e(TAG, "setOnClickListener: ")
+                    displaySpeechRecognizer()
+
                 }
             }
         }
@@ -263,6 +315,40 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 //    doActionOnItemClicked()
 //
 //    }
+    companion object {
+        private const val SPEECH_REQUEST_CODE = 0
+    }
 
+
+    // Create an intent that can start the Speech Recognizer activity
+    private fun displaySpeechRecognizer() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+        }
+        // Start the activity, the intent will be populated with the speech text
+        startActivityForResult(intent, SPEECH_REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == SPEECH_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            val spokenText: String? =
+                data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).let { results ->
+                    results?.get(0)
+                }
+            // Do something with spokenText
+            saveNoteAndRefresh(spokenText)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun saveNoteAndRefresh(spokenText: String?) {
+//        db.layoutSwipe.visibility  = View.GONE
+//        val note = Note("", description = spokenText.toString())
+//        noteViewModel.insert(note)
+
+    }
 
 }

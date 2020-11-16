@@ -40,7 +40,8 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteHolder>() {
 
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
         val currentNote = notes[position]
-        holder.tvNotes.text = currentNote.description
+//        holder.tvNotes.text = currentNote.description
+        holder.tvNotes.text = currentNote.empployeName
 
 
 //        holder.imageViewCheck.setOnClickListener {
@@ -50,16 +51,15 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteHolder>() {
 //            }
 //        }
 
-        if (currentNote.status.isEmpty()) {
-            holder.imageViewCheck.visibility = View.VISIBLE
-            holder.imageViewDone.visibility = View.GONE
-
-//            holder.lottieDoneView.playAnimation()
-//            currentNote.status = STATUS.COMPLETED.name
-        } else {
-//            holder.imageViewCheck.visibility = View.GONE
-//            holder.imageViewDone.visibility = View.VISIBLE
-        }
+//        if (currentNote.status.isEmpty()) {
+//            holder.imageViewCheck.visibility = View.VISIBLE
+//            holder.imageViewDone.visibility = View.GONE
+////            holder.lottieDoneView.playAnimation()
+////            currentNote.status = STATUS.COMPLETED.name
+//        } else {
+////            holder.imageViewCheck.visibility = View.GONE
+////            holder.imageViewDone.visibility = View.VISIBLE
+//        }
 
     }
 
