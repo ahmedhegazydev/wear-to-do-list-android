@@ -1,4 +1,4 @@
-package com.heagzy.myapplication
+package com.heagzy.myapplication.ui.dialogs
 
 import android.content.Context
 import android.graphics.Color
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.heagzy.myapplication.R
 
 object DepartmentsDialog {
 
@@ -23,7 +24,7 @@ object DepartmentsDialog {
 
     fun showDialog(context: Context, listener: LocationsOtionsListener) {
         dialog = BottomSheetDialog(context)
-        this.context = context
+        DepartmentsDialog.context = context
         dialog?.window?.setGravity(Gravity.CENTER)
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog?.setContentView(R.layout.locatons_options_dialog)

@@ -1,4 +1,4 @@
-package com.heagzy.myapplication
+package com.heagzy.myapplication.utils
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

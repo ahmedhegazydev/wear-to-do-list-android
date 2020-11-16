@@ -1,4 +1,4 @@
-package com.heagzy.myapplication;
+package com.heagzy.myapplication.utils;
 
 import android.content.Context;
 import android.view.GestureDetector;
